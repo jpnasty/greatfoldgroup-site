@@ -1050,9 +1050,15 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
         ['Social ads', 'Facebook and Instagram campaigns aimed at your best customers'],
         ['Social posting', 'A monthly content calendar, scheduled and posted for you'],
         ['Testing and reporting', 'Ongoing tests and a plain-language monthly report']
-      ],
-      addon: { label: 'Content subscription', range: '$500 – $1,500', unit: 'per month',
-        text: 'Fresh photos, short videos, and ready-to-post captions each month, from one on-site shoot. Post them yourself, or have us post them. Available as an add-on to a Strategy or Marketing plan, with a 3-month minimum.' } }
+      ] },
+    { label: 'Content creation', range: '$500 – $1,500+', unit: 'per month',
+      intro: 'Photos, short videos, and ready-to-post content that look like your business, not stock.',
+      items: [
+        ['Photo shoots', 'On-site photos of your space, team, products, and work'],
+        ['Short-form video', 'Quick clips and reels for social and your website'],
+        ['Ready-to-post content', 'Edited, sized for each platform, with captions written'],
+        ['Posting', 'Post it yourself, or have us schedule and post it for you']
+      ] }
   ];
   var CONSULT = [
     { n: 'Hourly consulting', p: '$150', u: '/hr', d: 'For a focused question: review an agency proposal, a campaign before launch, or a pricing decision. One-hour minimum.' },
@@ -1071,7 +1077,7 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
       return '<section class="pr-group"><div class="pr-top"><div class="stack" style="gap:6px"><h2>' + g.label + '</h2><p class="pr-intro">' + g.intro + '</p></div>' +
         '<div class="pr-top-price">' + price(g.range, g.unit, g.mo) + (g.extra ? '<span class="pr-extra">' + g.extra + '</span>' : '') + '</div></div>' +
         '<ul class="pr-items">' + items + '</ul>' + addon +
-        '<a class="more" href="#' + g.page + '" data-go="' + g.page + '">About ' + g.label.toLowerCase() + ' →</a></section>';
+        (g.page ? '<a class="more" href="#' + g.page + '" data-go="' + g.page + '">About ' + g.label.toLowerCase() + ' →</a>' : '') + '</section>';
     }).join('') +
     '<section class="pr-group pr-consult"><div class="stack" style="gap:6px"><h2>Ad hoc consulting</h2><p class="pr-intro">Senior marketing and research advice when you need it, without a project.</p></div>' +
       '<div class="pr-consult-grid">' + CONSULT.map(function (c) {
