@@ -604,7 +604,32 @@ main section.view { padding-block: 0; }
 .pr-list { display: flex; flex-direction: column; gap: 16px; }
 .pr-group { background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 28px; }
 .pr-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; padding-bottom: 6px; }
-.pr-head h2 { font-size: 1.4rem; }
+.pr-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 32px; flex-wrap: wrap; }
+.pr-head h2, .pr-top h2, .pr-consult h2 { font-size: 1.4rem; }
+.pr-intro { margin: 0; color: var(--ink-soft); max-width: 46ch; }
+.pr-top-price { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+.pr-range { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 6px; font-variant-numeric: tabular-nums; }
+.pr-top-price .pr-range { justify-content: flex-end; }
+.pr-range strong { font-family: var(--f-display); font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; white-space: nowrap; }
+.pr-range em { color: var(--ink-soft); font-style: normal; font-size: 0.95rem; margin-left: -4px; }
+.pr-range span { width: 100%; color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.pr-extra { color: var(--ink-soft); font-size: 0.9rem; }
+.pr-extra strong { color: var(--ink); font-family: var(--f-display); }
+.pr-items { list-style: none; margin: 18px 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
+.pr-items li { display: flex; flex-direction: column; gap: 2px; padding-left: 14px; border-left: 2px solid var(--crease); }
+.pr-items strong { font-family: var(--f-display); font-weight: 600; font-size: 1.02rem; letter-spacing: -0.01em; }
+.pr-items span { color: var(--ink-soft); font-size: 0.93rem; }
+.pr-addon { margin: 4px 0 16px; padding: 16px 20px; border: 1px dashed var(--crease); border-radius: var(--r-md); background: var(--tint); }
+.pr-addon-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px 24px; flex-wrap: wrap; }
+.pr-addon-head h3 { font-size: 1.05rem; margin-top: 2px; }
+.pr-addon .pr-range strong { font-size: 1.2rem; }
+.pr-addon .pr-range span { display: none; }
+.pr-addon p { margin: 8px 0 0; color: var(--ink-soft); font-size: 0.93rem; }
+.pr-consult-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.pr-opt { padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--r-md); display: flex; flex-direction: column; gap: 6px; }
+.pr-opt h3 { font-size: 1.05rem; }
+.pr-opt p { margin: 0; color: var(--ink-soft); font-size: 0.93rem; }
+@media (max-width: 720px) { .pr-items, .pr-consult-grid { grid-template-columns: 1fr; } .pr-top-price { align-items: flex-start; text-align: left; } .pr-top-price .pr-range { justify-content: flex-start; } }
 .pr-sub h4 { margin: 14px 0 2px; font: 600 0.75rem var(--f-body); text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
 .pr-sub ul { list-style: none; margin: 0; padding: 0; }
 .pr-row { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -1000,20 +1025,60 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
     return '<div class="stack svc-sec" style="gap:16px" id="' + id + '-pricing"><h2>Pricing</h2><div class="price-stats">' + cards.join('') +
       '<div class="price-stat price-cta"><span>Every project starts with a free call and a written quote.</span><a class="more" href="#pricing" data-go="pricing">See all pricing →</a></div></div></div>';
   }
+  var PRICING = [
+    { label: 'Strategy', page: 'strategy', range: '$1,250 – $7,000+', unit: 'per project',
+      intro: 'Customer research and a plan you can act on. Most projects run 4–8 weeks.',
+      items: [
+        ['Customer pulse survey', 'A short survey to answer one key question, fast'],
+        ['Customer insights study', 'Who your best customers are and why they buy'],
+        ['Pricing research', 'What customers will pay, and the price to set'],
+        ['Positioning and messaging', 'What your brand stands for and the message to lead with'],
+        ['Marketing plan', 'Who to target, what to say, and where to spend, with KPIs']
+      ] },
+    { label: 'Digital setup', page: 'digital-optimization', range: '$750 – $6,000+', unit: 'per project',
+      extra: 'Site Care from <strong>$50</strong>/mo',
+      intro: 'A website that brings in leads, and tracking so every lead counts.',
+      items: [
+        ['Website audit', 'Find what’s costing you leads, with a clear fix list'],
+        ['Tracking and analytics', 'Every call and form tracked in GA4 and your ad platforms'],
+        ['Local SEO', 'Google Business Profile and on-page basics so customers find you'],
+        ['Website build', 'A new 3–6 page site built around your customers'],
+        ['Site Care', 'Hosting, backups, and updates, from $50 to $150 a month']
+      ] },
+    { label: 'Marketing', page: 'digital-marketing', range: '$150 – $2,500+', unit: 'management fee', mo: true,
+      intro: 'Ads aimed at the customers your research says matter most. Ad spend is paid to the platforms directly.',
+      items: [
+        ['Google Ads', 'Search and local campaigns, set up and managed'],
+        ['Social ads', 'Facebook and Instagram campaigns aimed at your best customers'],
+        ['Social posting', 'A monthly content calendar, scheduled and posted for you'],
+        ['Testing and reporting', 'Ongoing tests and a plain-language monthly report']
+      ],
+      addon: { label: 'Content subscription', range: '$500 – $1,500', unit: 'per month',
+        text: 'Fresh photos, short videos, and ready-to-post captions each month, from one on-site shoot. Post them yourself, or have us post them. Available as an add-on to a Strategy or Marketing plan, with a 3-month minimum.' } }
+  ];
+  var CONSULT = [
+    { n: 'Hourly consulting', p: '$150', u: '/hr', d: 'For a focused question: review an agency proposal, a campaign before launch, or a pricing decision. One-hour minimum.' },
+    { n: 'Advisory retainer', p: '$1,500 – $3,000', u: '/mo', d: 'A set number of hours each month for check-ins, data review, and a senior second opinion when you need one.' }
+  ];
   function renderPricing() {
     var el = document.getElementById('pricing-list');
     if (!el) return;
-    el.innerHTML = ['insights', 'optimize', 'grow'].map(function (k) {
-      var g = PKG[k], meta = PKG_META[k];
-      var once = g.items.filter(function (x) { return !x.mo; }), mo = g.items.filter(function (x) { return x.mo; });
-      var row = function (x) {
-        return '<li class="pr-row"><div class="pr-name"><strong>' + x.n + '</strong><span>' + x.d + '</span></div>' +
-          '<div class="pr-price"><span>from</span> <strong>' + x.p + '</strong>' + (x.mo ? '<em>/mo</em>' : '') + '</div></li>';
-      };
-      var sub = function (title, xs) { return xs.length ? '<div class="pr-sub"><h4>' + title + '</h4><ul>' + xs.map(row).join('') + '</ul></div>' : ''; };
-      return '<section class="pr-group"><div class="pr-head"><h2>' + meta.label + '</h2><a class="more" href="#' + meta.page + '" data-go="' + meta.page + '">About ' + meta.label.toLowerCase() + ' →</a></div>' +
-        sub('One-time projects', once) + sub(once.length ? 'Ongoing support' : 'Monthly plans', mo) + '</section>';
-    }).join('');
+    var price = function (r, unit, mo) {
+      return '<div class="pr-range"><strong>' + r + '</strong>' + (mo ? '<em>/mo</em>' : '') + '<span>' + unit + '</span></div>';
+    };
+    el.innerHTML = PRICING.map(function (g) {
+      var items = g.items.map(function (x) { return '<li><strong>' + x[0] + '</strong><span>' + x[1] + '</span></li>'; }).join('');
+      var addon = g.addon ? '<div class="pr-addon"><div class="pr-addon-head"><div><span class="tag">Add-on</span><h3>' + g.addon.label + '</h3></div>' +
+        price(g.addon.range, g.addon.unit, true) + '</div><p>' + g.addon.text + '</p></div>' : '';
+      return '<section class="pr-group"><div class="pr-top"><div class="stack" style="gap:6px"><h2>' + g.label + '</h2><p class="pr-intro">' + g.intro + '</p></div>' +
+        '<div class="pr-top-price">' + price(g.range, g.unit, g.mo) + (g.extra ? '<span class="pr-extra">' + g.extra + '</span>' : '') + '</div></div>' +
+        '<ul class="pr-items">' + items + '</ul>' + addon +
+        '<a class="more" href="#' + g.page + '" data-go="' + g.page + '">About ' + g.label.toLowerCase() + ' →</a></section>';
+    }).join('') +
+    '<section class="pr-group pr-consult"><div class="stack" style="gap:6px"><h2>Ad hoc consulting</h2><p class="pr-intro">Senior marketing and research advice when you need it, without a project.</p></div>' +
+      '<div class="pr-consult-grid">' + CONSULT.map(function (c) {
+        return '<div class="pr-opt"><h3>' + c.n + '</h3><div class="pr-range"><strong>' + c.p + '</strong><em>' + c.u + '</em></div><p>' + c.d + '</p></div>';
+      }).join('') + '</div></section>';
   }
   renderPricing();
   var WEBSITE_BLOCK =
