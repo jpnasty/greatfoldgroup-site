@@ -1146,7 +1146,7 @@ footer.site .ph { color: #0D1526; }
         '<p class="lede">Call, email, or send a short note. I personally reply to every message, usually within a day.</p>' +
         '<div class="direct">' +
           '<div class="direct-row"><div><div class="v" id="' + p + '-phone" data-copy-value="(424) 253-5313"><a href="tel:+14242535313">Call Me Today</a></div></div><button class="copy" data-copy="' + p + '-phone" type="button">Copy</button></div>' +
-          '<div class="direct-row"><div><div class="v" id="' + p + '-email" data-copy-value="jason@greatfoldgroup.com"><a href="mailto:jason@greatfoldgroup.com">Email me today!</a></div></div><button class="copy" data-copy="' + p + '-email" type="button">Copy</button></div>' +
+          (isHome ? '<div class="direct-row"><div><div class="v" id="' + p + '-email" data-copy-value="jason@greatfoldgroup.com"><a href="mailto:jason@greatfoldgroup.com">Email me today!</a></div></div><button class="copy" data-copy="' + p + '-email" type="button">Copy</button></div>' : '') +
         '</div>' +
       '</div>' +
       '<form class="inquiry" novalidate data-form="' + p + '" name="contact" method="POST">' +
