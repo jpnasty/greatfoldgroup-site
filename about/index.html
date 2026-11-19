@@ -615,7 +615,7 @@ main section.view { padding-block: 0; }
 .pr-range span { width: 100%; color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
 .pr-extra { color: var(--ink-soft); font-size: 0.9rem; }
 .pr-extra strong { color: var(--ink); font-family: var(--f-display); }
-.pr-items { list-style: none; margin: 18px 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
+.pr-ex { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; } .pr-ex + .pr-items { margin-top: 12px; padding-top: 0; border-top: 0; } .pr-items { list-style: none; margin: 18px 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
 .pr-items li { display: flex; flex-direction: column; gap: 2px; padding-left: 14px; border-left: 2px solid var(--crease); }
 .pr-items strong { font-family: var(--f-display); font-weight: 600; font-size: 1.02rem; letter-spacing: -0.01em; }
 .pr-items span { color: var(--ink-soft); font-size: 0.93rem; }
@@ -1162,7 +1162,7 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
         price(g.addon.range, g.addon.unit, true) + '</div><p>' + g.addon.text + '</p></div>' : '';
       return '<section class="pr-group"><div class="pr-top"><div class="stack" style="gap:6px"><h2>' + g.label + '</h2><p class="pr-intro">' + g.intro + '</p></div>' +
         '<div class="pr-top-price">' + price(g.range, g.unit, g.mo) + (g.extra ? '<span class="pr-extra">' + g.extra + '</span>' : '') + '</div></div>' +
-        '<ul class="pr-items">' + items + '</ul>' + addon +
+        '<p class="pr-ex">Examples of what’s included</p><ul class="pr-items">' + items + '</ul>' + addon +
         (g.page ? '<a class="more" href="#' + g.page + '" data-go="' + g.page + '">About ' + g.label.toLowerCase() + ' →</a>' : '') + '</section>';
     }).join('') +
     '<section class="pr-group pr-consult"><div class="stack" style="gap:6px"><h2>Ad hoc consulting</h2><p class="pr-intro">Senior marketing and research advice when you need it, without a project.</p></div>' +
@@ -1280,7 +1280,7 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
         '<div class="fit-pair">' +
           '<div class="fit-ask"><h4>Sound familiar?</h4><ul class="fit-quotes">' + (ASKING[s.id] || []).map(function (x) { return '<li>“' + x + '”</li>'; }).join('') + '</ul>' +
             '<h4 class="fit-h">You’re a good fit if</h4><ul class="fit-list">' + s.fit.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>' +
-          '<div class="fit-get"><h4>What you’ll get</h4><ul class="checks">' + s.get.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>' +
+          '<div class="fit-get"><h4>Examples of what you’ll get</h4><ul class="checks">' + s.get.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>' +
         '</div>' +
         howBlock(s.id) +
         proofBlock(s.id) +
