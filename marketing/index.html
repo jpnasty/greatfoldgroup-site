@@ -613,6 +613,7 @@ main section.view { padding-block: 0; }
 .pr-range strong { font-family: var(--f-display); font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; white-space: nowrap; }
 .pr-range em { color: var(--ink-soft); font-style: normal; font-size: 0.95rem; margin-left: -4px; }
 .pr-range span { width: 100%; color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.pr-dual { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 28px; }
 .pr-extra { color: var(--ink-soft); font-size: 0.9rem; }
 .pr-extra strong { color: var(--ink); font-family: var(--f-display); }
 .pr-ex { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; } .pr-ex + .pr-items { margin-top: 12px; padding-top: 0; border-top: 0; } .pr-items { list-style: none; margin: 18px 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
@@ -629,7 +630,7 @@ main section.view { padding-block: 0; }
 .pr-opt { padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--r-md); display: flex; flex-direction: column; gap: 6px; }
 .pr-opt h3 { font-size: 1.05rem; }
 .pr-opt p { margin: 0; color: var(--ink-soft); font-size: 0.93rem; }
-@media (max-width: 720px) { .pr-items, .pr-consult-grid { grid-template-columns: 1fr; } .pr-top-price { align-items: flex-start; text-align: left; } .pr-top-price .pr-range { justify-content: flex-start; } }
+@media (max-width: 720px) { .pr-items, .pr-consult-grid { grid-template-columns: 1fr; } .pr-top-price { align-items: flex-start; text-align: left; } .pr-top-price .pr-range { justify-content: flex-start; } .pr-dual { justify-content: flex-start; } }
 .pr-sub h4 { margin: 14px 0 2px; font: 600 0.75rem var(--f-body); text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
 .pr-sub ul { list-style: none; margin: 0; padding: 0; }
 .pr-row { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -1063,7 +1064,7 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
         ['Social posting', 'A monthly content calendar, scheduled and posted for you'],
         ['Testing and reporting', 'Ongoing tests and a plain-language monthly report']
       ] },
-    { label: 'Content creation', range: '$500 – $1,500+', unit: 'per month',
+    { label: 'Content creation', prices: [['Monthly from', '$800', true], ['One-time shoots from', '$500', false]], extra: 'Final price depends on how much you need.',
       intro: 'Photos, short videos, and ready-to-post content that look like your business, not stock.',
       items: [
         ['Photo shoots', 'On-site photos of your space, team, products, and work'],
@@ -1087,7 +1088,7 @@ footer.site .brand-mark { background: #F6F8F7; border-radius: 8px; padding: 5px 
       var addon = g.addon ? '<div class="pr-addon"><div class="pr-addon-head"><div><span class="tag">Add-on</span><h3>' + g.addon.label + '</h3></div>' +
         price(g.addon.range, g.addon.unit, true) + '</div><p>' + g.addon.text + '</p></div>' : '';
       return '<section class="pr-group"><div class="pr-top"><div class="stack" style="gap:6px"><h2>' + g.label + '</h2><p class="pr-intro">' + g.intro + '</p></div>' +
-        '<div class="pr-top-price">' + price(g.range, g.unit, g.mo) + (g.extra ? '<span class="pr-extra">' + g.extra + '</span>' : '') + '</div></div>' +
+        '<div class="pr-top-price">' + (g.prices ? '<div class="pr-dual">' + g.prices.map(function (p) { return '<div class="pr-range"><span>' + p[0] + '</span><strong>' + p[1] + '</strong>' + (p[2] ? '<em>/mo</em>' : '') + '</div>'; }).join('') + '</div>' : price(g.range, g.unit, g.mo)) + (g.extra ? '<span class="pr-extra">' + g.extra + '</span>' : '') + '</div></div>' +
         '<p class="pr-ex">Examples of what’s included</p><ul class="pr-items">' + items + '</ul>' + addon +
         (g.page ? '<a class="more" href="#' + g.page + '" data-go="' + g.page + '">About ' + g.label.toLowerCase() + ' →</a>' : '') + '</section>';
     }).join('') +
